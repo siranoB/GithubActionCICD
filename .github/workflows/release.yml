@@ -36,7 +36,7 @@ jobs:
       uses: timheuer/base64-to-file@v1
       with:
         fileName: 'keystore.jks'
-        fileDir: './'
+        fileDir: '/home/runner/work/GithubActionCICD/GithubActionCICD/app'
         encodedString: ${{ secrets.APP_KEYSTORE_BASE64 }}
           
     - name: Generate Keystore file from Github Secrets
