@@ -19,19 +19,26 @@ android {
             useSupportLibrary = true
         }
     }
-
     buildTypes {
         release {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
+    signingConfigs {
+        create("release") {
+            storeFile = file("../keystore/keystore.jks")
+            storePassword = System.getenv()["KEY_PASSWORD"]
+            keyAlias = System.getenv()["KEY_ALIAS"]
+            keyPassword = System.getenv()["KEY_ALIAS_PASSWORD"]
+        }
+    }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
     buildFeatures {
         compose = true
