@@ -1,4 +1,4 @@
-name: Android CI
+name: Android Release CI
 
 on:
   push:
@@ -36,7 +36,13 @@ jobs:
         KEY_ALIAS_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
-      run: ./gradlew assembleRelease --stacktrace
+        run: |
+          bash ./gradlew assembleRelease \
+            -Pandroid.injected.signing.store.file=$ \
+            -Pandroid.injected.signing.store.password=$ \
+            -Pandroid.injected.signing.key.alias=$ \
+            -Pandroid.injected.signing.key.password=$ \
+            --stacktrace
       
     - name: Get release file apk path
       id: releaseApk
