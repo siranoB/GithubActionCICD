@@ -40,15 +40,16 @@ jobs:
           
     - name: Build Release apk
       env:
+        KEY_STORE_PATH: ${../keystore.jks}
         KEY_ALIAS_PASSWORD: ${{ secrets.KEY_PASSWORD }}
         KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
         KEY_PASSWORD: ${{ secrets.KEY_ALIAS_PASSWORD }}
       run: |
         bash ./gradlew assembleRelease \
-          -Pandroid.injected.signing.store.file=$ \
-          -Pandroid.injected.signing.store.password=$ \
-          -Pandroid.injected.signing.key.alias=$ \
-          -Pandroid.injected.signing.key.password=$ \
+          -Pandroid.injected.signing.store.file=$KEY_STORE_PATH \
+          -Pandroid.injected.signing.store.password=$KEY_PASSWORD \
+          -Pandroid.injected.signing.key.alias=$KEY_ALIAS \
+          -Pandroid.injected.signing.key.password=$KEY_PASSWORD \
           --stacktrace
       
     - name: Get release file apk path
