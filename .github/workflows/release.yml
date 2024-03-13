@@ -31,6 +31,14 @@ jobs:
     - name: Grant execute permission for gradlew
       run: chmod +x gradlew
 
+    - name: Decode Keystore
+      id: decode_keystore
+      uses: timheuer/base64-to-file@v1
+      with:
+        fileName: 'keystore.jks'
+        fileDir: './'
+        encodedString: ${{ secrets.APP_KEYSTORE_BASE64 }}
+          
     - name: Generate Keystore file from Github Secrets
       run: |
         echo "$KEYSTORE" > ./keystore.b64
